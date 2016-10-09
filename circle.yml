@@ -23,6 +23,4 @@ deployment:
     owner: XaroRSA
     commands:
       - ./deploy.sh
-      - ./sign_packages.sh
-      - aws s3 sync ./dist s3://$BUCKET_NAME
       - ./trigger_grafana_docker_build.sh ${TRIGGER_GRAFANA_DOCKER_CIRCLECI_TOKEN}
