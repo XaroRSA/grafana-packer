@@ -11,6 +11,9 @@ dependencies:
 
   pre:
     - sudo apt-get update; sudo apt-get install rpm
+    - if [ -z "$BUCKET_NAME" ]; then echo Bucket name must be specified as an environment variable; exit 1; fi
+    - pip install awscli
+      #- if [[ ! -d $HOME/aws ]]; then curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && unzip awscli-bundle.zip && sudo ./awscli-bundle/install -i $HOME/aws -b /usr/local/bin/aws; fi
     - ./build_container.sh
 
 test:
@@ -23,5 +26,6 @@ deployment:
     owner: XaroRSA
     commands:
       - ./deploy.sh
-      - rsync -avz ./dist circleci@188.166.167.140:/tmp
+      # - ./sign_packages.sh
+      - aws s3 sync ./dist s3://$BUCKET_NAME
       - ./trigger_grafana_docker_build.sh ${TRIGGER_GRAFANA_DOCKER_CIRCLECI_TOKEN}
