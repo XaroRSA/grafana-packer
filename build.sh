@@ -3,11 +3,11 @@
 # This is ment to run inside this build container
 
 GOPATH=/go
-REPO_PATH=$GOPATH/src/github.com/grafana/grafana
+REPO_PATH=$GOPATH/src/github.com/xarorsa/grafana
 
-mkdir -p /go/src/github.com/grafana
-cd /go/src/github.com/grafana
-git clone --depth 1 https://github.com/grafana/grafana.git -b $BRANCH
+mkdir -p /go/src/github.com/xarorsa
+cd /go/src/github.com/xarorsa
+git clone --depth 1 https://github.com/xarorsa/grafana.git -b $BRANCH
 
 # go get -u -v github.com/grafana/grafana
 
